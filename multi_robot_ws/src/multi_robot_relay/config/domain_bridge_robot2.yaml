@@ -1,0 +1,25 @@
+# Domain Bridge configuration for Robot 2
+# Bridges topics from domain 2 to domain 0
+
+name: robot2_bridge
+from_domain: 2
+to_domain: 0
+
+topics:
+  /odometry:
+    type: nav_msgs/msg/Odometry
+    remap: /robot2/odom
+
+  /map:
+    type: nav_msgs/msg/OccupancyGrid
+    remap: /robot2/map
+    qos:
+      durability: transient_local
+      reliability: reliable
+      history: keep_last
+      depth: 1
+
+  /robot2/goal_pose:
+    type: geometry_msgs/msg/PoseStamped
+    reversed: true
+    remap: /goal_pose

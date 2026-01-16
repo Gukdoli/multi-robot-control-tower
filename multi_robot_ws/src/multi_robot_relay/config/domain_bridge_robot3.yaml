@@ -1,0 +1,25 @@
+# Domain Bridge configuration for Robot 3
+# Bridges topics from domain 3 to domain 0
+
+name: robot3_bridge
+from_domain: 3
+to_domain: 0
+
+topics:
+  /odometry:
+    type: nav_msgs/msg/Odometry
+    remap: /robot3/odom
+
+  /map:
+    type: nav_msgs/msg/OccupancyGrid
+    remap: /robot3/map
+    qos:
+      durability: transient_local
+      reliability: reliable
+      history: keep_last
+      depth: 1
+
+  /robot3/goal_pose:
+    type: geometry_msgs/msg/PoseStamped
+    reversed: true
+    remap: /goal_pose
